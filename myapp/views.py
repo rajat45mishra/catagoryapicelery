@@ -8,8 +8,6 @@ def view_data(request):
 	url='__enterurlhere__'
 	url=str(url)
 	data=debug_task.delay(url,kwargs['catagory'],kwargs['value'])
-	print(data.status,type(data.status))
-	print(data.id)
 	if data.status =='SUCCESS':
 		data2=AsyncResult(data.id)
 		print(data2.get())
@@ -17,6 +15,5 @@ def view_data(request):
 	else:
 		time.sleep(2)
 		data2=AsyncResult(data.id)
-		print(data2.get())
 		return JsonResponse(data2.get())
 	return HttpResponseServerError('something went wrong')
