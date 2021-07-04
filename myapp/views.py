@@ -5,7 +5,9 @@ from celery.result import AsyncResult
 import time
 def view_data(request):
 	# get data by catagory
-	data=debug_task.delay()
+	url='__enterurlhere__'
+	url=str(url)
+	data=debug_task.delay(url,kwargs['catagory'],kwargs['value'])
 	print(data.status,type(data.status))
 	print(data.id)
 	if data.status =='SUCCESS':
